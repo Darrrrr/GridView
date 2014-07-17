@@ -54,19 +54,19 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
    
-    return ceil((double)[self.events count] / 2);
+    return ceil((double)[self.events count] / 3);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"section : %ld  count : %lu",(long)section,(unsigned long)ceil((double)[self.events count]/2) );
-    if (section<[self.events count] / 2)
+    NSLog(@"section : %ld  count : %lu",(long)section,(unsigned long)ceil((double)[self.events count]/3) );
+    if (section<[self.events count] / 3)
     {
-        return 2;
+        return 3;
     }
     else
     {
-        return [self.events count] % 2;
+        return [self.events count] % 3;
     }
     
 }
@@ -75,7 +75,7 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Cell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    NSDictionary *event = [self.events objectAtIndex:(indexPath.section*2 + indexPath.row)];
+    NSDictionary *event = [self.events objectAtIndex:(indexPath.section*3 + indexPath.row)];
     cell.label.text = [event objectForKey:@"name"];
     cell.imageView.image = [UIImage imageNamed:[event objectForKey:@"image"]];
     return cell;
@@ -84,7 +84,7 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *event = [self.events objectAtIndex:(indexPath.section*2 + indexPath.row)];
+    NSDictionary *event = [self.events objectAtIndex:(indexPath.section*3 + indexPath.row)];
     NSLog(@"select event name : %@ event:%@", [event objectForKey:@"name"],indexPath);
     NSString * identifier= [NSString stringWithFormat:@"%@",[event objectForKey:@"name"]];
     UIStoryboard *board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
